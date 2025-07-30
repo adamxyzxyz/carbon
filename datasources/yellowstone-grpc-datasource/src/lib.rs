@@ -402,6 +402,7 @@ async fn send_subscribe_update_transaction_info(
         let Some(yellowstone_tx_meta) = transaction_info.meta else {
             return;
         };
+        let transaction_index = transaction_info.index;
         let Ok(versioned_transaction) = create_tx_versioned(yellowstone_transaction) else {
             return;
         };
@@ -420,6 +421,7 @@ async fn send_subscribe_update_transaction_info(
             slot,
             block_time,
             block_hash: None,
+            index: transaction_index,
         }));
         if let Err(e) = sender.try_send((update, id)) {
             log::error!(

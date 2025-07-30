@@ -136,7 +136,7 @@ fn process_instructions<F1, F2>(
             InstructionMetadata {
                 transaction_metadata: transaction_metadata.clone(),
                 stack_height: 1,
-                index: i as u32,
+                instruction_index: i as u32,
                 absolute_path: vec![i as u8],
             },
             build_instruction(account_keys, compiled_instruction, &is_writable, &is_signer),
@@ -161,7 +161,7 @@ fn process_instructions<F1, F2>(
                             InstructionMetadata {
                                 transaction_metadata: transaction_metadata.clone(),
                                 stack_height: stack_height as u32,
-                                index: inner_tx.index as u32,
+                                instruction_index: inner_tx.index as u32,
                                 absolute_path: path_stack[..stack_height].into(),
                             },
                             build_instruction(
@@ -306,7 +306,7 @@ pub fn unnest_parsed_instructions<T: InstructionDecoderCollection>(
             InstructionMetadata {
                 transaction_metadata: transaction_metadata.clone(),
                 stack_height,
-                index: ix_idx as u32 + 1,
+                instruction_index: ix_idx as u32 + 1,
                 absolute_path: vec![],
             },
             parsed_instruction.instruction,

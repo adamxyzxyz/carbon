@@ -57,7 +57,12 @@ use {
 pub struct InstructionMetadata {
     pub transaction_metadata: Arc<TransactionMetadata>,
     pub stack_height: u32,
-    pub index: u32,
+    /// The index of this instruction in the transaction. The index is
+    /// relative within stack height and is 1-based. Note that the inner
+    /// instruction indexes are grouped into one vector, so different inner
+    /// instructions that have different stack heights may have continuous
+    /// indexes.
+    pub instruction_index: u32,
     pub absolute_path: Vec<u8>,
 }
 
